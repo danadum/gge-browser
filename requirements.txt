@@ -1,0 +1,4 @@
+websockets==10.4
+webdriver-manager==4.0.2
+selenium==4.22.0
+asyncio==3.4.3
