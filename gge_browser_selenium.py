@@ -16,7 +16,6 @@ def open_browser(game_url, on_ready):
     options = webdriver.ChromeOptions()
     options.add_argument('--no-sandbox')
     options.add_argument("--start-maximized")
-    options.add_argument("--allow-running-insecure-content")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(options=options)
