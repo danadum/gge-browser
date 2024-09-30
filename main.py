@@ -7,7 +7,8 @@ import sys
 
 def print_preserve_input(message):
     input = readline.get_line_buffer()
-    sys.stdout.write(f"\x1b[s\x1b[2K\r{message}\n> {input}\x1b[u")
+    sys.stdout.write(f"\x1b[2K\r{message}\n> {input}")
+    sys.stdout.flush()
 
 
 if __name__ == '__main__':

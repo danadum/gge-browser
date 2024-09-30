@@ -1,6 +1,6 @@
 # gge-browser
 
-Library in python to open the game (Goodgame Empire)[] in a browser with control over the game socket from the code.
+Library in python to open the game (Goodgame Empire)[https://empire.goodgamestudios.com] in a browser with control over the game socket from the code.
 
 ## Installation
 
