@@ -1,12 +1,33 @@
 from websocket_mock import WebSocketAppMock
 from colors import colors
 
-import readline
 import sys
+import platform # built in
 
+if platform.system() == 'Windows':
+    import msvcrt # built in
+
+    def get_line_buffer():
+
+        line = ''
+        while msvcrt.kbhit():
+            ch = msvcrt.getche()
+            if ord(ch) == 13:
+                break
+            elif ord(ch) == 8:
+                line = line[:-1]
+            else:
+                line += ch.decode()
+            
+        return line
+else:
+    import readline
+
+    def get_line_buffer():
+        return readline.get_line_buffer()
 
 def print_preserve_input(message):
-    input = readline.get_line_buffer()
+    input = get_line_buffer()
     sys.stdout.write(f"\x1b[2K\r{message}\n> {input}")
     sys.stdout.flush()
 
