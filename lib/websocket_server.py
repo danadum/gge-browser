@@ -14,15 +14,14 @@ class WebsocketServer:
         self.clients = []
         self.closed = asyncio.Event()
 
-
-    async def handler(self, websocket, path):
-        self.on_connection and self.on_connection(websocket, path)
+    async def handler(self, websocket):
+        self.on_connection and self.on_connection(websocket)
         self.clients.append(websocket)
         try:
             async for message in websocket:
                 self.on_message and self.on_message(websocket, message)
         finally:
-            self.on_disconnection and self.on_disconnection(websocket, path)
+            self.on_disconnection and self.on_disconnection(websocket)
             self.clients.remove(websocket)
 
     async def start(self):
@@ -37,9 +36,20 @@ class WebsocketServer:
     async def broadcast(self, message):
         for client in self.clients:
             await client.send(message)
-    
+
     def broadcast_sync(self, message):
         thread = threading.Thread(target=lambda: asyncio.run(self.broadcast(message)), daemon=True)
+        thread.start()
+        thread.join()
+
+    async def close_connections(self):
+        for client in self.clients:
+            await client.close()
+        self.clients.clear()
+        self.closed.set()
+
+    def close_connections_sync(self):
+        thread = threading.Thread(target=lambda: asyncio.run(self.close_connections()), daemon=True)
         thread.start()
         thread.join()
 

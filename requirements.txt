@@ -1,5 +1,6 @@
-websockets>=10.4
+websockets>=13.1
 webdriver-manager>=4.0.2
 selenium>=4.22.0
 asyncio>=3.4.3
 pyreadline3>=3.0; os_name == "nt"
+pygge>=2.2.5
