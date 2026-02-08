@@ -21,8 +21,6 @@ def open_browser(game_url, on_ready):
     options.add_experimental_option("detach", True)
     driver = webdriver.Chrome(options=options)
 
-    print(len(driver.window_handles), "windows opened")
-    exit(0)
     windows = driver.window_handles
     if len(windows) > 1:
         driver.switch_to.window(windows[0])

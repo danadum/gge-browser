@@ -4,6 +4,9 @@ from pygge.gge_socket import GgeSocket
 
 
 class GgeSocketBrowser(GgeSocket):
+    def __new__(cls, *args, **kwargs):
+        return super().__new__(cls, "ep-", None, *args, **kwargs)
+
     def __init__(
         self, on_send=None, on_open=None, on_message=None, on_error=None, on_close=None
     ):
